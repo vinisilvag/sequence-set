@@ -14,7 +14,7 @@ using namespace std;
 
 struct elemento {
   unsigned posicao;
-  char modelo[30];
+  char modelo[30]; // elemento chave
   char cache[15];
   unsigned tdp;
   char frequencia[12];

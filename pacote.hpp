@@ -46,8 +46,14 @@ void pacote::inserir(dado umDado) {
 void pacote::imprimir() {
   cout << "[";
   for (unsigned i = 0; i < numElementos; i++)
-    cout << "(" << elementos[i].posicao << "/" << elementos[i].modelo << "/"
-         << elementos[i].cache << "/" << elementos[i].frequencia << ")";
+    cout << "(Posicao: " << elementos[i].posicao
+         << " / Modelo: " << elementos[i].modelo
+         << " / Cache: " << elementos[i].cache << "/TDP: " << elementos[i].tdp
+         << " / Frequencia: " << elementos[i].frequencia
+         << " / Nucleos: " << elementos[i].nucleos
+         << " / Cinebench's: " << elementos[i].cinebenchR15Single << ", "
+         << elementos[i].cinebenchR15Multi << " e " << elementos[i].cinebenchR20
+         << ")" << endl;
   cout << "]";
 }
 

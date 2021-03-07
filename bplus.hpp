@@ -8,29 +8,30 @@
   ****** FUNÇÂO DO CÓDIGO AQUI ******
 */
 
-#include "pacote.hpp"
 #include "sequenceset.hpp"
 #include <fstream>
 #include <iostream>
+#include <string.h>
 
 using namespace std;
-
-const int CAP_MAXIMA = 5;
 
 class Noh {
   friend class BMais;
 
 private:
   bool folha;
-  int *dados, quantidade;
+  tipoChave *dados;
+  int quantidade;
   Noh **filhos;
+  int posFilhosArq[NUM_FILHOS];
 
 public:
   Noh();
 };
 
 Noh::Noh() {
-  dados = new int[CAP_PACOTE];
+  folha = true;
+  dados = new tipoChave[CAP_PACOTE];
   filhos = new Noh *[NUM_FILHOS];
 }
 
@@ -38,53 +39,60 @@ class BMais {
 private:
   Noh *raiz;
   sequenceset *sequenceSet;
-  string nomeArqSequenceSet;
+  string nomeArqSS;
   string nomeArqIndices;
 
-  void inserirInterno(int item, Noh *umNoh, Noh *filho);
+  void inserirInterno(tipoChave chave, Noh *umNoh, Noh *filho);
   Noh *encontrarPai(Noh *umNoh, Noh *filho);
   void imprimirAux(Noh *raiz, int nivel);
   void lerFilhosArq();
 
 public:
   BMais(string nomeArq);
-  void inserir(int item);
-  void buscar(int item);
+  void inserir(dado umDado);
+  void buscar(tipoChave chave);
   void imprimir();
+  void depurar();
 };
 
 BMais::BMais(string nomeArq) {
-  nomeArqSequenceSet = nomeArq + ".txt";
+  nomeArqSS = nomeArq + ".txt";
   nomeArqIndices = nomeArq + "Indices.txt";
 
-  sequenceSet = new sequenceset(nomeArqSequenceSet);
+  sequenceSet = new sequenceset(nomeArqSS);
 
-  fstream arq(nomeArqIndices.c_str(), ios::in | ios::out);
+  raiz = NULL;
+
+  fstream arq(nomeArqIndices.c_str(), ios::in | ios::out | ios::binary);
 
   if (!arq) {
     ofstream arq(nomeArqIndices.c_str());
-  } else {
-    raiz = new Noh();
-
-    // arq.read((char *)&(raiz->folha), sizeof(bool));
-    // arq.read((char *)&(raiz->quantidade), sizeof(int));
-    // arq.read((char *)(raiz->dados), sizeof(int) * CAP_PACOTE);
-    // arq.read((char *)(raiz->filhos), sizeof(Noh) * (NUM_FILHOS));
   }
+  // } else {
+  //   raiz = new Noh();
+
+  //   // Ler B+ do arquivo?
+  //   arq.read((char *)&(raiz->folha), sizeof(bool));
+  //   arq.read((char *)&(raiz->quantidade), sizeof(int));
+  //   arq.read((char *)(raiz->dados), sizeof(int) * CAP_PACOTE);
+  //   arq.read((char *)(raiz->filhos), sizeof(Noh) * (NUM_FILHOS));
+  // }
 
   arq.close();
 
-  if (raiz != NULL) {
+  if (raiz != NULL)
     lerFilhosArq();
-  }
-
-  raiz = NULL;
 }
 
-void BMais::inserir(int item) {
+void BMais::lerFilhosArq() {}
+
+void BMais::inserir(dado umDado) {
+  tipoChave chave;
+  strcpy(chave, umDado.modelo);
+
   if (raiz == NULL) {
     raiz = new Noh();
-    raiz->dados[0] = item;
+    strcpy(raiz->dados[0], chave);
     raiz->folha = true;
     raiz->quantidade = 1;
   } else {
@@ -97,7 +105,7 @@ void BMais::inserir(int item) {
 
       for (int i = 0; i < aux->quantidade; i++) {
         if (lugarCerto == 0) {
-          if (item < aux->dados[i]) {
+          if (strcmp(chave, aux->dados[i]) < 0) {
             aux = aux->filhos[i];
             lugarCerto++;
           }
@@ -109,17 +117,17 @@ void BMais::inserir(int item) {
       }
     }
 
-    if (aux->quantidade < CAP_MAXIMA) {
+    if (aux->quantidade < int(CAP_PACOTE)) {
       int i = 0;
-      while (item > aux->dados[i] && i < aux->quantidade) {
+      while (strcmp(chave, aux->dados[i]) > 0 && i < aux->quantidade) {
         i++;
       }
 
       for (int j = aux->quantidade; j > i; j--) {
-        aux->dados[j] = aux->dados[j - 1];
+        strcpy(aux->dados[j], aux->dados[j - 1]);
       }
 
-      aux->dados[i] = item;
+      strcpy(aux->dados[i], chave);
       aux->quantidade++;
 
       aux->filhos[aux->quantidade] = aux->filhos[aux->quantidade - 1];
@@ -127,47 +135,47 @@ void BMais::inserir(int item) {
     } else {
       Noh *novaFolha = new Noh();
 
-      int nohTemp[CAP_MAXIMA + 1];
+      tipoChave nohTemp[NUM_FILHOS];
 
-      for (int i = 0; i < CAP_MAXIMA; i++) {
-        nohTemp[i] = aux->dados[i];
+      for (int i = 0; i < int(CAP_PACOTE); i++) {
+        strcpy(nohTemp[i], aux->dados[i]);
       }
 
       int i = 0, j;
 
-      while (item > nohTemp[i] && i < CAP_MAXIMA) {
+      while (strcmp(chave, nohTemp[i]) > 0 && i < int(CAP_PACOTE)) {
         i++;
       }
 
-      for (int j = CAP_MAXIMA + 1; j > i; j--) {
-        nohTemp[j] = nohTemp[j - 1];
+      for (int j = NUM_FILHOS; j > i; j--) {
+        strcpy(nohTemp[j], nohTemp[j - 1]);
       }
 
-      nohTemp[i] = item;
+      strcpy(nohTemp[i], chave);
       novaFolha->folha = true;
 
-      aux->quantidade = (CAP_MAXIMA + 1) / 2;
-      novaFolha->quantidade = CAP_MAXIMA + 1 - (CAP_MAXIMA + 1) / 2;
+      aux->quantidade = (NUM_FILHOS) / 2;
+      novaFolha->quantidade = NUM_FILHOS - (NUM_FILHOS) / 2;
 
       aux->filhos[aux->quantidade] = novaFolha;
 
-      novaFolha->filhos[novaFolha->quantidade] = aux->filhos[CAP_MAXIMA];
+      novaFolha->filhos[novaFolha->quantidade] = aux->filhos[CAP_PACOTE];
 
-      aux->filhos[CAP_MAXIMA] = NULL;
+      aux->filhos[CAP_PACOTE] = NULL;
 
       for (i = 0; i < aux->quantidade; i++) {
-        aux->dados[i] = nohTemp[i];
+        strcpy(aux->dados[i], nohTemp[i]);
       }
 
       for (i = 0, j = aux->quantidade; i < novaFolha->quantidade; i++, j++) {
-        novaFolha->dados[i] = nohTemp[j];
+        strcpy(novaFolha->dados[i], nohTemp[j]);
       }
 
       if (aux == raiz) {
 
         Noh *novaRaiz = new Noh();
 
-        novaRaiz->dados[0] = novaFolha->dados[0];
+        strcpy(novaRaiz->dados[0], novaFolha->dados[0]);
         novaRaiz->filhos[0] = aux;
         novaRaiz->filhos[1] = novaFolha;
         novaRaiz->folha = false;
@@ -180,54 +188,52 @@ void BMais::inserir(int item) {
   }
 }
 
-void BMais::inserirInterno(int item, Noh *umNoh, Noh *filho) {
-  if (umNoh->quantidade < CAP_PACOTE) {
+void BMais::inserirInterno(tipoChave chave, Noh *umNoh, Noh *filho) {
+  if (umNoh->quantidade < int(CAP_PACOTE)) {
     int i = 0;
 
-    while (item > umNoh->dados[i] && i < umNoh->quantidade) {
+    while (strcmp(chave, umNoh->dados[i]) > 0 && i < umNoh->quantidade) {
       i++;
     }
 
     for (int j = umNoh->quantidade; j > i; j--) {
-
-      umNoh->dados[j] = umNoh->dados[j - 1];
+      strcpy(umNoh->dados[j], umNoh->dados[j - 1]);
     }
 
     for (int j = umNoh->quantidade + 1; j > i + 1; j--) {
       umNoh->filhos[j] = umNoh->filhos[j - 1];
     }
 
-    umNoh->dados[i] = item;
+    strcpy(umNoh->dados[i], chave);
     umNoh->quantidade++;
     umNoh->filhos[i + 1] = filho;
   } else {
     Noh *novoInterno = new Noh;
-    int dadosTemp[NUM_FILHOS];
+    tipoChave dadosTemp[NUM_FILHOS];
     Noh *filhosTemp[NUM_FILHOS + 1];
 
-    for (int i = 0; i < CAP_PACOTE; i++) {
-      dadosTemp[i] = umNoh->dados[i];
+    for (int i = 0; i < int(CAP_PACOTE); i++) {
+      strcpy(dadosTemp[i], umNoh->dados[i]);
     }
 
-    for (int i = 0; i < NUM_FILHOS; i++) {
+    for (int i = 0; i < int(NUM_FILHOS); i++) {
       filhosTemp[i] = umNoh->filhos[i];
     }
 
     int i = 0, j;
 
-    while (item > dadosTemp[i] && i < CAP_PACOTE) {
+    while (strcmp(chave, dadosTemp[i]) > 0 && i < int(CAP_PACOTE)) {
       i++;
     }
 
     for (int j = NUM_FILHOS; j > i; j--) {
-
-      dadosTemp[j] = dadosTemp[j - 1];
+      strcpy(dadosTemp[j], dadosTemp[j - 1]);
     }
 
-    dadosTemp[i] = item;
+    strcpy(dadosTemp[i], chave);
 
     for (int j = NUM_FILHOS + 1; j > i + 1; j--) {
-      dadosTemp[j] = dadosTemp[j - 1];
+      strcpy(dadosTemp[j], dadosTemp[j - 1]);
     }
 
     filhosTemp[i + 1] = filho;
@@ -235,11 +241,11 @@ void BMais::inserirInterno(int item, Noh *umNoh, Noh *filho) {
 
     umNoh->quantidade = (NUM_FILHOS) / 2;
 
-    novoInterno->quantidade = CAP_PACOTE - (NUM_FILHOS) / 2;
+    novoInterno->quantidade = int(CAP_PACOTE) - (int(NUM_FILHOS)) / 2;
 
     for (i = 0, j = umNoh->quantidade + 1; i < novoInterno->quantidade;
          i++, j++) {
-      novoInterno->dados[i] = dadosTemp[j];
+      strcpy(novoInterno->dados[i], dadosTemp[j]);
     }
 
     for (i = 0, j = umNoh->quantidade + 1; i < novoInterno->quantidade + 1;
@@ -250,7 +256,7 @@ void BMais::inserirInterno(int item, Noh *umNoh, Noh *filho) {
     if (umNoh == raiz) {
       Noh *novaRaiz = new Noh();
 
-      novaRaiz->dados[0] = umNoh->dados[umNoh->quantidade];
+      strcpy(novaRaiz->dados[0], umNoh->dados[umNoh->quantidade]);
 
       novaRaiz->filhos[0] = umNoh;
       novaRaiz->filhos[1] = novoInterno;
@@ -286,11 +292,10 @@ Noh *BMais::encontrarPai(Noh *umNoh, Noh *filho) {
   return pai;
 }
 
-void BMais::buscar(int item) {
+void BMais::buscar(tipoChave chave) {
   if (raiz == NULL) {
     cout << "A árvore está vazia" << endl;
   } else {
-
     Noh *aux = raiz;
 
     while (aux->folha == false) {
@@ -298,7 +303,7 @@ void BMais::buscar(int item) {
 
       for (int i = 0; i < aux->quantidade; i++) {
         if (lugarCerto == 0) {
-          if (item < aux->dados[i]) {
+          if (strcmp(chave, aux->dados[i]) < 0) {
             aux = aux->filhos[i];
             lugarCerto++;
           }
@@ -311,7 +316,7 @@ void BMais::buscar(int item) {
     }
 
     for (int i = 0; i < aux->quantidade; i++) {
-      if (aux->dados[i] == item) {
+      if (strcmp(aux->dados[i], chave) == 0) {
         cout << aux->dados[i] << ": Encontrado" << endl;
         return;
       }
@@ -329,7 +334,7 @@ void BMais::imprimir() {
 void BMais::imprimirAux(Noh *raiz, int nivel) {
   int i;
 
-  for (int i = 0; i < raiz->quantidade; i++) {
+  for (i = 0; i < raiz->quantidade; i++) {
     if (!raiz->folha) {
       imprimirAux(raiz->filhos[i], nivel + 1);
     }
@@ -337,8 +342,10 @@ void BMais::imprimirAux(Noh *raiz, int nivel) {
     cout << raiz->dados[i] << '/' << nivel << ' ';
   }
 
-  if (!raiz->folha) {
-    cout << "?";
-    // imprimirAux(raiz->filhos[i], nivel + 1);
-  }
+  // if (!raiz->folha) {
+  //   cout << "?";
+  //   imprimirAux(raiz->filhos[i], nivel + 1);
+  // }
 }
+
+void BMais::depurar() {}

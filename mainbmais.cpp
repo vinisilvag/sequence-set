@@ -1,10 +1,10 @@
-#include "sequenceset.hpp"
+#include "bplus.hpp"
 #include <iostream>
 
 using namespace std;
 
 int main() {
-  sequenceset meuSeqSet("teste.dat");
+  BMais minhaBMais("arquivo");
   dado umDado;
   tipoChave umaChave;
   char operacao;
@@ -22,18 +22,17 @@ int main() {
         cin >> umDado.nucleos;
         cin >> umDado.cinebenchR15Single >> umDado.cinebenchR15Multi >>
             umDado.cinebenchR20;
-        meuSeqSet.inserirDado(umDado);
+        minhaBMais.inserir(umDado);
         break;
       case 'b': // buscar
         cin >> umaChave;
-        umDado = meuSeqSet.buscar(umaChave);
-        cout << "Busca: " << umDado.modelo << "/" << umDado.posicao << endl;
+        minhaBMais.buscar(umaChave);
         break;
       case 'p': // mostrar estrutura
-        meuSeqSet.imprimir();
+        minhaBMais.imprimir();
         break;
       case 'd': // mostrar estrutura
-        meuSeqSet.depurar();
+        minhaBMais.depurar();
         break;
       case 's': // sair
         // será tratado no while

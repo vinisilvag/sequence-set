@@ -51,9 +51,6 @@ public:
   void imprimir();
   void depurar();
   dado buscar(tipoChave chave);
-  /*
-  void remover(tipoChave chave);
-  */
 };
 
 sequenceset::sequenceset(string arquivo) {
