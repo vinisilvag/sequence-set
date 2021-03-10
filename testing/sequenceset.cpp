@@ -3,16 +3,24 @@
  * by Joukim, Fevereiro de 2021 - Estrutura de Dados (GCC216)
  * Caracteristicas da primeira implementação - fevereiro de 2021:
  * -> código adaptado do código de vetor expansível
- * -> uso de constantes (em configuração.hpp) para facilitar ajustes
+ * -> uso de constantes (em configuração.cpp) para facilitar ajustes
  * -> se dado pode ser inserido em dois pacotes, escolhe o que gera
  * -> menos impacto
  */
 
-#include "../general/pacote.hpp"
+#ifndef PACOTE_CPP
+#include "pacote.cpp"
+#endif
+#ifndef FSTREAM
 #include <fstream>
+#endif
+#ifndef IOSTREAM
 #include <iostream>
+#endif
 #include <stdexcept>
+#ifndef STRING_H
 #include <string.h>
+#endif
 
 using namespace std;
 
@@ -257,7 +265,8 @@ dado sequenceset::buscaBinaria(dado vetor[], int inicio, int fim,
             return vetor[meio];
     } else { // inicio == fim, ou seja, não há mais o que buscar
         // retornamos -1 para indicar posição não encontrada
-        throw runtime_error("Busca: elemento não encontrado.");
+        dado emptyDado;
+        return emptyDado;
     }
 }
 

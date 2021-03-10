@@ -10,21 +10,12 @@
  * -> constantes (CAP_PACOTE e MIN_PACOTE)
  */
 
+#ifndef CONFIGURACAO_CPP
+#define CONFIGURACAO_CPP
+
 using namespace std;
 
-struct elemento {
-    unsigned posicao;
-    char modelo[30]; // elemento chave
-    char cache[15];
-    unsigned tdp;
-    char frequencia[12];
-    char nucleos[6];
-    float cinebenchR15Single;
-    float cinebenchR15Multi;
-    float cinebenchR20;
-};
-
-// typedef elemento dado;      // a arvore guarda informacoes do tipo Dado
+// a arvore guarda informacoes do tipo Dado
 typedef char tipoChave[30]; // tipo da chave usada na comparação
 
 // capacidade máxima e mínima do pacote
@@ -37,3 +28,5 @@ const unsigned POS_MEIO = 2;
 
 // posição inválida no disco
 const int POS_INVALIDA = -1;
+
+#endif

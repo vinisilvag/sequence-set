@@ -1,0 +1,201 @@
+Número do teste;Quantidade de dados;Operação;Tempo de acesso;Número de acessos
+1;100;Inserção;1944
+1;100;Busca Resultados;866
+1;100;Inserção;1930
+1;100;Busca Resultados;983
+1;100;Inserção;1866
+1;100;Busca Resultados;952
+1;100;Inserção;1705
+1;100;Busca Resultados;854
+1;100;Inserção;1146
+1;100;Busca Resultados;830
+2;200;Inserção;1771
+2;200;Busca Resultados;1372
+2;200;Inserção;1766
+2;200;Busca Resultados;708
+2;200;Inserção;1417
+2;200;Busca Resultados;675
+2;200;Inserção;1235
+2;200;Busca Resultados;550
+2;200;Inserção;1003
+2;200;Busca Resultados;796
+3;300;Inserção;1643
+3;300;Busca Resultados;1109
+3;300;Inserção;1532
+3;300;Busca Resultados;730
+3;300;Inserção;1211
+3;300;Busca Resultados;730
+3;300;Inserção;1274
+3;300;Busca Resultados;875
+3;300;Inserção;1564
+3;300;Busca Resultados;1154
+4;400;Inserção;1430
+4;400;Busca Resultados;884
+4;400;Inserção;1873
+4;400;Busca Resultados;1403
+4;400;Inserção;1698
+4;400;Busca Resultados;1161
+4;400;Inserção;1839
+4;400;Busca Resultados;891
+4;400;Inserção;1302
+4;400;Busca Resultados;929
+5;500;Inserção;2143
+5;500;Busca Resultados;1995
+5;500;Inserção;1720
+5;500;Busca Resultados;1569
+5;500;Inserção;1649
+5;500;Busca Resultados;1675
+5;500;Inserção;2502
+5;500;Busca Resultados;1898
+5;500;Inserção;1819
+5;500;Busca Resultados;1094
+6;600;Inserção;2191
+6;600;Busca Resultados;1359
+6;600;Inserção;2474
+6;600;Busca Resultados;1382
+6;600;Inserção;2157
+6;600;Busca Resultados;1489
+6;600;Inserção;2919
+6;600;Busca Resultados;2039
+6;600;Inserção;2089
+6;600;Busca Resultados;1383
+7;700;Inserção;3743
+7;700;Busca Resultados;1761
+7;700;Inserção;2464
+7;700;Busca Resultados;1542
+7;700;Inserção;3478
+7;700;Busca Resultados;1688
+7;700;Inserção;2354
+7;700;Busca Resultados;1801
+7;700;Inserção;2611
+7;700;Busca Resultados;1714
+8;800;Inserção;2429
+8;800;Busca Resultados;2426
+8;800;Inserção;2867
+8;800;Busca Resultados;1904
+8;800;Inserção;2973
+8;800;Busca Resultados;1970
+8;800;Inserção;2440
+8;800;Busca Resultados;1845
+8;800;Inserção;4246
+8;800;Busca Resultados;1955
+9;900;Inserção;3184
+9;900;Busca Resultados;2350
+9;900;Inserção;4161
+9;900;Busca Resultados;2222
+9;900;Inserção;3679
+9;900;Busca Resultados;2125
+9;900;Inserção;3721
+9;900;Busca Resultados;3436
+9;900;Inserção;2847
+9;900;Busca Resultados;2059
+10;1000;Inserção;3602
+10;1000;Busca Resultados;2417
+10;1000;Inserção;5126
+10;1000;Busca Resultados;2462
+10;1000;Inserção;3510
+10;1000;Busca Resultados;3740
+10;1000;Inserção;3751
+10;1000;Busca Resultados;2459
+10;1000;Inserção;3390
+10;1000;Busca Resultados;2266
+11;1100;Inserção;3599
+11;1100;Busca Resultados;2832
+11;1100;Inserção;3842
+11;1100;Busca Resultados;2504
+11;1100;Inserção;4954
+11;1100;Busca Resultados;2592
+11;1100;Inserção;4240
+11;1100;Busca Resultados;3122
+11;1100;Inserção;4017
+11;1100;Busca Resultados;2528
+12;1200;Inserção;3888
+12;1200;Busca Resultados;4080
+12;1200;Inserção;4537
+12;1200;Busca Resultados;3303
+12;1200;Inserção;3979
+12;1200;Busca Resultados;3546
+12;1200;Inserção;4096
+12;1200;Busca Resultados;3759
+12;1200;Inserção;4202
+12;1200;Busca Resultados;4123
+13;1300;Inserção;5544
+13;1300;Busca Resultados;3721
+13;1300;Inserção;5518
+13;1300;Busca Resultados;4213
+13;1300;Inserção;5860
+13;1300;Busca Resultados;3039
+13;1300;Inserção;4924
+13;1300;Busca Resultados;3209
+13;1300;Inserção;5538
+13;1300;Busca Resultados;2825
+14;1400;Inserção;4390
+14;1400;Busca Resultados;3061
+14;1400;Inserção;4264
+14;1400;Busca Resultados;3076
+14;1400;Inserção;4631
+14;1400;Busca Resultados;3445
+14;1400;Inserção;4596
+14;1400;Busca Resultados;3536
+14;1400;Inserção;5705
+14;1400;Busca Resultados;4283
+15;1500;Inserção;5723
+15;1500;Busca Resultados;3326
+15;1500;Inserção;4572
+15;1500;Busca Resultados;3824
+15;1500;Inserção;6884
+15;1500;Busca Resultados;4119
+15;1500;Inserção;5684
+15;1500;Busca Resultados;3396
+15;1500;Inserção;4870
+15;1500;Busca Resultados;3333
+16;1600;Inserção;5339
+16;1600;Busca Resultados;6127
+16;1600;Inserção;5750
+16;1600;Busca Resultados;3975
+16;1600;Inserção;7947
+16;1600;Busca Resultados;5691
+16;1600;Inserção;5913
+16;1600;Busca Resultados;3636
+16;1600;Inserção;5079
+16;1600;Busca Resultados;4425
+17;1700;Inserção;6440
+17;1700;Busca Resultados;3759
+17;1700;Inserção;7957
+17;1700;Busca Resultados;5209
+17;1700;Inserção;6648
+17;1700;Busca Resultados;3793
+17;1700;Inserção;6486
+17;1700;Busca Resultados;4375
+17;1700;Inserção;6215
+17;1700;Busca Resultados;3689
+18;1800;Inserção;6880
+18;1800;Busca Resultados;6045
+18;1800;Inserção;6114
+18;1800;Busca Resultados;5866
+18;1800;Inserção;6055
+18;1800;Busca Resultados;3916
+18;1800;Inserção;6672
+18;1800;Busca Resultados;5571
+18;1800;Inserção;5548
+18;1800;Busca Resultados;4213
+19;1900;Inserção;7841
+19;1900;Busca Resultados;4756
+19;1900;Inserção;7611
+19;1900;Busca Resultados;4350
+19;1900;Inserção;6195
+19;1900;Busca Resultados;4582
+19;1900;Inserção;7129
+19;1900;Busca Resultados;4853
+19;1900;Inserção;6404
+19;1900;Busca Resultados;4379
+20;2000;Inserção;7751
+20;2000;Busca Resultados;4475
+20;2000;Inserção;7479
+20;2000;Busca Resultados;6225
+20;2000;Inserção;7171
+20;2000;Busca Resultados;5795
+20;2000;Inserção;7303
+20;2000;Busca Resultados;5205
+20;2000;Inserção;6293
+20;2000;Busca Resultados;5065
