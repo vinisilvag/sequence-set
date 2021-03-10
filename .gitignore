@@ -1,5 +1,9 @@
 .vscode
-arquivo.txt
-arquivoIndices.txt
-main
+/src/general/entradas.dat
+/src/general/gerarEntrada
+
+/src/b-plus/mainbmais
+/src/b-plus/main
+
+/src/sequence-set/main
 mainbmais
