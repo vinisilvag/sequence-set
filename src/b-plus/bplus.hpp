@@ -1,3 +1,13 @@
+/* Árvore B+ - Classe Principal
+ *
+ * Março de 2021 - Estrutura de Dados (GCC216)
+ * Copyright 2021 by Gustavo Ribeiro, Pedro Montuani e Vinicius Gomes,
+ *
+ * Este e o arquivo de implementacao da classe BMais, estrutura principal do
+ * projeto, que contém um ponteiro para o noh raiz da arvore de indices e os
+ * métodos para que a árvore seja devidamente manipulada.
+ */
+
 #include "noh.hpp"
 #include <iostream>
 #include <string.h>
@@ -16,9 +26,11 @@ public:
   void inserir(dado umDado);
   dado buscar(tipoChave chave);
   void imprimir();
+  void depurar();
 };
 
 void BMais::inserir(dado umDado) {
+  // caso raiz for nula insere na primeira posição dela
   if (raiz == NULL) {
     raiz = new Noh();
     raiz->folha = true;
@@ -41,7 +53,7 @@ void BMais::inserir(dado umDado) {
 
 Noh *BMais::insereAux(Noh *umNoh, dado umDado, dado &promovido) {
   if (umNoh->folha) {
-    if (umNoh->quantidade < CAP_PACOTE) {
+    if (umNoh->quantidade < int(CAP_PACOTE)) {
       insereEmNohFolhaNaoCheio(umNoh, umDado);
 
       return NULL;
@@ -66,7 +78,7 @@ Noh *BMais::insereAux(Noh *umNoh, dado umDado, dado &promovido) {
     Noh *nohAux = insereAux(umNoh->filhos[i + 1], umDado, promovido);
 
     if (nohAux != NULL) {
-      if (umNoh->quantidade < CAP_PACOTE) {
+      if (umNoh->quantidade < int(CAP_PACOTE)) {
         insereEmNohIntermediarioNaoCheio(umNoh, nohAux, promovido);
         return NULL;
       } else {
@@ -112,7 +124,7 @@ Noh *BMais::divideNoh(Noh *umNoh, dado &promovido) {
   umNoh->quantidade = POS_MEIO;
 
   if (!umNoh->folha) {
-    for (int i = 0; i <= POS_MEIO + 1; i++) {
+    for (unsigned i = 0; i <= POS_MEIO + 1; i++) {
       novo->filhos[i] = umNoh->filhos[POS_MEIO + 0 + i];
     }
   }
@@ -186,4 +198,8 @@ void BMais::imprimirAux(Noh *umNoh, int nivel) {
   if (!umNoh->folha) {
     imprimirAux(umNoh->filhos[i], nivel + 1);
   }
+}
+
+void BMais::depurar() {
+  cout << "Esse método não pode ser implementado :(" << endl;
 }

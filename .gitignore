@@ -1,9 +1,8 @@
 .vscode
-/src/general/entradas.dat
 /src/general/gerarEntrada
 
-/src/b-plus/mainbmais
 /src/b-plus/main
+/src/b-plus/bplus
 
 /src/sequence-set/main
 mainbmais

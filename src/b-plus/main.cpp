@@ -33,9 +33,9 @@ int main() {
       case 'p': // mostrar estrutura
         minhaBMais->imprimir();
         break;
-      // case 'd': // mostrar estrutura
-      // minhaBMais->depurar();
-      // break;
+      case 'd': // mostrar estrutura
+        minhaBMais->depurar();
+        break;
       case 's': // sair
         // será tratado no while
         break;
