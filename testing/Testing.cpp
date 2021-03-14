@@ -38,6 +38,9 @@ public:
         this->createInputsList();
         this->createSearchListWithResult();
         this->createSearchListWithoutResult();
+
+        this->showList("Entradas: ", this->inputs);
+        this->showList("Buscas: ", this->inputs);
     }
 
     void testBmais(int numTeste) {
@@ -198,6 +201,22 @@ private:
             }
         }
         return false;
+    }
+
+    void showList(string nomeLista, dado *list) {
+        for (int i = 0; i < this->tamanhoListas; i++) {
+            cout << nomeLista << ":" << endl;
+
+            cout << "modelo: " << list[i].modelo << endl;
+            cout << "cache: " << list[i].cache << endl;
+            cout << "tdp: " << list[i].tdp << endl;
+            cout << "frequencia: " << list[i].frequencia << endl;
+            cout << "nucleos: " << list[i].nucleos << endl;
+            cout << "cinebenchR15Single: " << list[i].cinebenchR15Single << endl;
+            cout << "cinebenchR15Multi: " << list[i].cinebenchR15Multi << endl;
+            cout << "cinebenchR20: " << list[i].cinebenchR20 << endl
+                 << endl;
+        }
     }
 
     void startCounting() {
