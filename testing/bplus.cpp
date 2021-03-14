@@ -150,7 +150,7 @@ void BMais::insereEmNohIntermediarioNaoCheio(Noh *umNoh, Noh *novo,
 
 dado BMais::buscar(tipoChave chave) {
     if (raiz == NULL) {
-        cout << "Árvore vazia" << endl;
+        throw runtime_error("Árvore vazia");
     } else {
         dado itemBuscado = buscarAux(raiz, chave);
         return itemBuscado;
